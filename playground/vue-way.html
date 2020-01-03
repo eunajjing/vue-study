@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let div = document.querySelector("#app");
+      let viewModel = {};
+
+      // Object.defineProperty(대상 객체, 객체의 속성, {
+      // 정의 할 내용
+      // })
+      // 객체의 동작을 재정의하는 api
+
+      Object.defineProperty(viewModel, "str", {
+        get: function() {
+          // viewModel.str에 접근했을 때의 동작을 정의
+        },
+        set: function(newValue) {
+          // viewModel.str에 값을 할당했을 때의 동작을 정의
+          // 할당되는 새로운 값이 파라미터로 들어온다
+          div.innerHTML = newValue;
+        }
+      });
+    </script>
+  </body>
+</html>
