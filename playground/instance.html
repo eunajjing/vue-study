@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      let vm = new Vue();
+      // vm을 콘솔에 찍으면 vue가 제공해주는 api와 속성들을 참고할 수 있다
+      let vm = new Vue({
+        el: "#app"
+        // id가 app인 엘리먼트에다가 해당 뷰 인스턴스를 붙이겠다는 뜻
+        // 인스턴스를 붙이지 않으면 사용이 불가
+        // 생성자 안에는 객체가 들어감에 유의
+      });
+    </script>
+  </body>
+</html>
