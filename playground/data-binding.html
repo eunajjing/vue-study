@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{num}}</p>
+      <p>{{doubleNum}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          num: 10
+        },
+        computed: {
+          // 가변적으로 바뀌는 값을 처리할 때 사용하는 속성
+          doubleNum: function() {
+            return this.num * 2;
+            // arrow function 사용 시 먹지 않는다
+            // this가 가리키는 대상이 달라지기 때문으로 추측됨
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
