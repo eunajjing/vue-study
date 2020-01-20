@@ -535,4 +535,199 @@ new Vue({
   </html>
   ```
 
-  
+# `Vue cli`의 생성
+
+```shell
+yarn global add @vue/cli
+```
+
+```shell
+vue cli "프로젝트명"
+```
+
+## `src/main.js`
+
+```vue
+new Vue({
+}).$mount('#app')
+```
+
+```vue
+new Vue({
+	el : '#app'
+})
+```
+
+두 개의 소스는 동일하다.
+
+### `render`
+
+`Vue` 내부적으로 사용하는 함수이자 템플릿이라는 속성을 사용했을 때 실행된다.
+
+```vue
+const App = {
+	template : '<div>App</div>'
+}
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+```
+
+```vue
+new Vue({
+	components : {
+		'app' : App
+	},
+}).$mount('#app')
+```
+
+두 개의 소스는 동일하다.
+
+# `Vue` 확장자
+
+```vue
+<template>
+  <!-- html -->
+	<!--
+		const appHeader = {
+			template : '<div>header</div>'
+		}
+	-->
+	<div>
+    header
+  </div>
+</template>
+
+<script>
+export default {
+// new Vue({
+//  ...
+//	\})
+  // Vue 인스턴스에 적용할 수 있는 속성들을 넣어줄 수 있다
+	methods : {
+    addNum : function() {
+      
+    }
+  }
+}
+</script>
+```
+
+> 컴포넌트의 이름은 두 개의 단어 조합으로 하는 것이 좋다. `html`의 표준 `tag`인지, `vue`의 태그인지 알 길이 없기 때문
+
+## 예제
+
+### 하위 컴포넌트
+
+```vue
+<template>
+  <div>
+    <div>{{str}}</div>
+    <!-- 리액트와 마찬가지로, 최상위 태그는 단 하나여야 한다 -->
+    <app-header v-bind:propsdata="str" v-on:renew="renewStr" />
+  </div>
+</template>
+
+<script>
+import AppHeader from "./components/AppHeader.vue";
+// vue라는 확장자까지 붙여주기를 권고한다
+
+export default {
+  data: function() {
+    // 반드시 함수를 반환해야 한다
+    return {
+      str: "Header"
+    };
+  },
+  components: {
+    "app-header": AppHeader
+  },
+  methods: {
+    renewStr: function() {
+      this.str = "hi";
+    }
+  }
+};
+</script>
+```
+
+### 루트 컴포넌트
+
+```vue
+<template>
+  <div>
+    <div>{{str}}</div>
+    <!-- 리액트와 마찬가지로, 최상위 태그는 단 하나여야 한다 -->
+    <app-header v-bind:propsdata="str" v-on:renew="renewStr" />
+  </div>
+</template>
+
+<script>
+import AppHeader from "./components/AppHeader.vue";
+// vue라는 확장자까지 붙여주기를 권고한다
+
+export default {
+  data: function() {
+    // 반드시 함수를 반환해야 한다
+    return {
+      str: "Header"
+    };
+  },
+  components: {
+    "app-header": AppHeader
+  },
+  methods: {
+    renewStr: function() {
+      this.str = "hi";
+    }
+  }
+};
+</script>
+```
+
+# 전체 프로젝트
+
+```vue
+<template>
+  <form v-on:submit.prevent="submitForm">
+    <!-- 이벤트 기본 새로고침을 막겠다 -->
+    <div>
+      <label for="username">id : </label>
+      <input v-model="username" id="username" type="text" />
+    </div>
+    <div>
+      <label for="password">pw : </label>
+      <input v-model="password" id="password" type="password" />
+    </div>
+    <button type="submit">login</button>
+  </form>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data: function() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    submitForm: function() {
+      const url = "http://jsonplaceholder.typicode.com/users";
+      const data = {
+        username: this.username,
+        password: this.password
+      };
+      axios
+        .post(url, data)
+        .then(res => console.log(res))
+        .catch();
+    }
+  }
+};
+</script>
+```
+
